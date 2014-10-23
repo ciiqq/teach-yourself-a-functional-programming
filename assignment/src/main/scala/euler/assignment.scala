@@ -12,7 +12,14 @@ object ProjectEuler {
    * By considering the terms in the Fibonacci sequence whose values do not
    * exceed four million, find the sum of the even-valued terms.
    */
-  def problem2(): Int = ???
+  def problem2(): Int = ???  /*{
+    def calculate(num:Int):Int = {
+      if (num > 4000000) 0
+      else calculate(num + 1) + calculate(num + 2)
+    }
+    calculate(1)
+    ei toimi
+  }*/
 
   /*
    * Largest palindrome product
@@ -23,8 +30,9 @@ object ProjectEuler {
    * Find the largest palindrome made from the product of two 3-digit numbers.
    *
    */
-  def problem4(): Int = ???
-
+  def problem4(): Int = {
+    ((for (a <- 100 until 999; b <- a until 999) yield a * b) filter (a => a.toString == a.toString.reverse)).max
+  }
   /*
    * Special Pythagorean triplet
    *
@@ -36,7 +44,10 @@ object ProjectEuler {
    * There exists exactly one Pythagorean triplet for which a + b + c = 1000.
    * Find the product abc.
    */
-  def problem9(): Int = ???
+  def problem9(): Int = {
+    val tulos = for (b <- 2 until (1 to 1000).find(n => n + math.sqrt(n) >= 1000).get; a <- 1 until b; c = 1000 - a - b if a * a + b * b == c * c) yield a * b * c
+    tulos(0)
+  }
 
 
   /*
@@ -55,7 +66,13 @@ object ProjectEuler {
    * Find the maximum total from top to bottom of the given triangle with 15
    * rows:
    */
-  def problem18(triangle: List[List[Int]]): Int = ???
+  def problem18(triangle: List[List[Int]]): Int = {
+    if (triangle.isEmpty) 0
+    else {
+      triangle.head.max + problem18(triangle.tail)
+    }
+    //voi varmaan arvata että tää ei toimi
+  }
 
   /*
    * Maximum path sum II
